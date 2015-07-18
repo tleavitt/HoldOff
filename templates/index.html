@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Lightweight Customer Service Queuing System via SMS">
+    <title>Hold Off</title>
+    <link href="{{ url_for('static', filename='css/materialize.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href='http://fonts.googleapis.com/css?family=Poiret+One|Merriweather|Pacifico' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <nav style="height:106px">
+      <div class="nav-wrapper">
+        <div class="row">
+          <a href="#!" class="brand-logo col offset-s2 "><div style="font-family: 'Merriweather', serif;font-weight:bold;border-radius:50%;background-color:#e57373 ;width:60px;height:60px;padding-left:5px;padding-top:5px;margin-top:16px" class="z-depth-2"><img src="{{ url_for('static', filename='img/phone.gif') }}" width="50px" height="50px"></div><span style="font-family: 'Pacifico', cursive;font-size:15px;position:relative;top:-24px;left:5px">hold off</span></a>
+          
+          <div class="title col offset-s4 s3" style="font-family: 'Poiret One', cursive;"><span style="font-size:20px;top:10px;">Department</span><br/><span style="font-size:30px;top:-24px;font-weight:bold">VISA Office</span></div>
+
+          <div class="col offset-s1" style="position:relative;top:25px"><a class="waves-effect  orange darken-1 btn"><i class="material-icons left" style="position:relative;bottom:13px">power_settings_newt</i>Close channel</a>
+          </div>
+<!--           <div class="col offset-s1" style="position:relative;top:25px"><a class="waves-effect blue lighten-2 btn"><i class="material-icons left" style="position:relative;bottom:13px">power_settings_newt</i>Open channel</a> -->
+          </div>          
+
+        </div>
+      </div>
+    </nav>
+
+    <!-- body -->
+
+    <!--if has next container-->
+    <div class="container">
+
+      <div class="row">
+          
+        <div class="col m10 offset-m1">
+
+          <div class="card">
+            
+            <span class="card-title" style="color:#ef5350;margin-left:10px;">Phone Number: (302)291-2919</span>
+            
+            <ul class="collection">
+              <!--loop-->
+              <li class="collection-item">
+                <span class="question">Whats is your default langue?</span>
+                <span class="answer">English</span>
+              </li>
+              <li class="collection-item">
+                <span class="question">Whats is your default langue?</span>
+                <span class="answer">English</span>
+              </li>
+              <li class="collection-item">
+                <span class="question">Whats is your default langue?</span>
+                <span class="answer">English</span>
+              </li>
+              <li class="collection-item">
+                <span class="question">Whats is your default langue?</span>
+                <span class="answer">English</span>
+              </li>
+            </ul> 
+
+            <div class="card-action">
+               <div class="col" style="position:relative;top:-10px;"><a class="waves-effect red lighten-2 btn" style="color:white"><i class="material-icons left" style="position:relative;">skip_next</i>Next Customer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+
+    <!--if does not have next customer-->
+    <div class="container">
+
+      <div class="row">
+          
+        <div class="col m10 offset-m1">
+
+          <div class="card">
+            
+            <span class="card-title" style="color:#ef5350;margin-left:10px;">Hooray! No customers are on hold.</span>
+
+            <div class="card-action">
+               <div class="col" style="position:relative;top:-10px;"><i class="material-icons left" style="position:relative;">replay_10</i>Refresh every 10 sec
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </body>
+</html>
