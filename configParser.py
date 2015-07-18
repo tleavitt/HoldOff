@@ -9,7 +9,7 @@ def is_number(s):
 def parseConfigFile(confFileName):
 
     questionTree = {}
-    channels = []
+    channels = {}
 
     with open(confFileName) as configFile:
         lines = configFile.readlines()
@@ -28,7 +28,7 @@ def build_tree(cur_node, lines, i, max_len, channels):
     flag, value, i = get_next_vals(lines, i)
     if (flag == "#"):
         cur_node["#"] = value
-        channels.append(value)
+        channels[value] = True
         flag, value, i = get_next_vals(lines, i)
         cur_node["A"] = value
         flag, value, i = get_next_vals(lines, i)
