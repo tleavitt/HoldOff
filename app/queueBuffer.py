@@ -35,6 +35,9 @@ class QueueBuffer(object):
     def empty(self):
         return self.q.empty()
 
+    def getLen():
+        return self.q.qsize()
+
 # if __name__ == "__main__":
 #     qb = QueueBuffer()
 #     qb.put(2.5,[('What is the meal','burger'),("Name","Tom")])

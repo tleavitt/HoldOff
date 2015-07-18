@@ -31,7 +31,7 @@ class QueueCtrl(object):
 
 	def size(self, id):
 		if id in self.bufferList:
-			return len(self.bufferList[id])
+			return self.bufferList[id].getLen()
 		else:
 			-1
 
