@@ -14,6 +14,8 @@ ctrl = QueueCtrl()
 
 SECRET_KEY = 'mysecretkey'
 MY_TREE, MY_CHANNELS = cfp.parseConfigFile("conf")
+for channel in MY_CHANNELS:
+    ctrl.createChannel(channel)
 conversations = {}
 END_MESSAGE = 'Thanks for answering our questions! We will be calling you shortly. There are %d customers ahead of you in the queue.'
 
@@ -27,13 +29,13 @@ def formatPhone(phone):
 
 @application.route("/<pageid>")
 def show(pageid):
-    phone=formatPhone('1029302910')
-    pid=pageid 
+    phone = formatPhone('1029302910')
+    pid = pageid 
     QAlist = []
     more = True
     #print ctrl.empty(pid)
     if not ctrl.empty(pid):
-      QAlist = ctrl.getNextFrom(pid)
+      QAlist, phone = ctrl.getNextFrom(pid)
     else:
       more = False
     #print QAlist
@@ -66,7 +68,7 @@ def receiveText():
       currentAnswers.append( (currentNode['Q'], currentNode[from_body]['A']) )
       currentNode = currentNode[from_body]
       if "#" in currentNode:
-        ctrl.putNext(currentNode["#"], 1, currentAnswers)
+        ctrl.putNext(currentNode["#"], 1, from_number, currentAnswers)
         # 1: priority in queue
         conversations.pop(from_number)
         message = END_MESSAGE % ctrl.size(currentNode["#"]) 

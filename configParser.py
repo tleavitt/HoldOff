@@ -42,5 +42,5 @@ def build_tree(cur_node, lines, i, max_len, channels):
         cur_node["N"] = int(value)
         for child_num in xrange(1, cur_node["N"] + 1):
             cur_node[str(child_num)] = new_child = {} 
-            i = build_tree(new_child, lines, i, max_len)
+            i = build_tree(new_child, lines, i, max_len, channels)
         return i
