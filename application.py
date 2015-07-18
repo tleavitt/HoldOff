@@ -20,7 +20,7 @@ END_MESSAGE = 'Thanks for answering our questions! We will be calling you shortl
 @application.route("/")
 def home():
     # channels = ['VISA','Sales']
-    return render_template('index.html',channels = myChannels)
+    return render_template('index.html',channels = MY_CHANNELS)
 
 def formatPhone(phone):
   return '('+phone[0:3]+')'+phone[3:6]+'-'+phone[6:]
