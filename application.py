@@ -16,13 +16,14 @@ SECRET_KEY = 'mysecretkey'
 MY_TREE, MY_CHANNELS = cfp.parseConfigFile("conf")
 for channel in MY_CHANNELS:
     ctrl.createChannel(channel)
+    
 conversations = {}
 END_MESSAGE = 'Thanks for answering our questions! We will be calling you shortly. There are %d customers ahead of you in the queue.'
 
 @application.route("/")
 def home():
     # channels = ['VISA','Sales']
-    return render_template('index.html',channels = MY_CHANNELS)
+    return render_template('index.html', channels = MY_CHANNELS.keys())
 
 def formatPhone(phone):
   return '('+phone[0:3]+')'+phone[3:6]+'-'+phone[6:]
