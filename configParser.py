@@ -9,12 +9,13 @@ def is_number(s):
 def parseConfigFile(confFileName):
 
     questionTree = {}
+    channels = []
 
     with open(confFileName) as configFile:
         lines = configFile.readlines()
-        build_tree(questionTree, lines, 0, len(lines))
+        build_tree(questionTree, lines, 0, len(lines), channels)
 
-    return questionTree
+    return questionTree, channels
 
 def get_next_vals(lines, i):
     tokens = lines[i].strip().split(" ")
@@ -22,11 +23,12 @@ def get_next_vals(lines, i):
     return tokens[0], " ".join(tokens[1:]), i + 1
 
 # returns the line number that the function ended at
-def build_tree(cur_node, lines, i, max_len):
+def build_tree(cur_node, lines, i, max_len, channels):
     if (i >= max_len): return i
     flag, value, i = get_next_vals(lines, i)
     if (flag == "#"):
         cur_node["#"] = value
+        channels.append(value)
         flag, value, i = get_next_vals(lines, i)
         cur_node["A"] = value
         flag, value, i = get_next_vals(lines, i)

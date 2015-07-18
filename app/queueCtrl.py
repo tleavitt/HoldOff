@@ -29,6 +29,12 @@ class QueueCtrl(object):
 		else:
 			False
 
+	def size(self, id):
+		if id in self.bufferList:
+			return len(self.bufferList[id])
+		else:
+			-1
+
 # if __name__=="__main__":
 # 	ctrl = QueueCtrl()
 # 	ctrl.createChannel('VISA')

@@ -5,18 +5,22 @@ from app import QueueCtrl
 
 application = Flask(__name__)
 ctrl = QueueCtrl()
-ctrl.createChannel('VISA')
-ctrl.createChannel('Sales')
-ctrl.putNext('VISA',2.5,[('What is the meal','burger'),("Name","Tom")])
-ctrl.putNext('VISA',3.5,[('What is the meal','Sandwich'),("Name","James")])
-ctrl.putNext('VISA',1.5,[('What is the meal','burger'),("Name","Rebecca")])
-ctrl.putNext('Sales',1.4,[('What is the meal','food'),("Name","Will")])
+# ctrl.createChannel('VISA')
+# ctrl.createChannel('Sales')
+# ctrl.putNext('VISA',2.5,[('What is the meal','burger'),("Name","Tom")])
+# ctrl.putNext('VISA',3.5,[('What is the meal','Sandwich'),("Name","James")])
+# ctrl.putNext('VISA',1.5,[('What is the meal','burger'),("Name","Rebecca")])
+# ctrl.putNext('Sales',1.4,[('What is the meal','food'),("Name","Will")])
 
+SECRET_KEY = 'mysecretkey'
+MY_TREE, MY_CHANNELS = cfp.parseConfigFile("conf")
+conversations = {}
+END_MESSAGE = 'Thanks for answering our questions! We will be calling you shortly. There are %d customers ahead of you in the queue.'
 
 @application.route("/")
 def home():
-    channels = ['VISA','Sales']
-    return render_template('index.html',channels=channels)
+    # channels = ['VISA','Sales']
+    return render_template('index.html',channels = myChannels)
 
 def formatPhone(phone):
   return '('+phone[0:3]+')'+phone[3:6]+'-'+phone[6:]
@@ -35,11 +39,6 @@ def show(pageid):
     #print QAlist
     return render_template('page.html', pid=pid, QAlist=QAlist, more=more, phone=phone)
 
-SECRET_KEY = 'mysecretkey'
-MY_TREE = cfp.parseConfigFile("conf")
-conversations = {}
-
-END_MESSAGE = 'Thanks for answering our questions. We will be calling you shortly!'
 
 @application.route("/twilio", methods=['GET', 'POST'])
 def receiveText():
@@ -67,9 +66,10 @@ def receiveText():
       currentAnswers.append( (currentNode['Q'], currentNode[from_body]['A']) )
       currentNode = currentNode[from_body]
       if "#" in currentNode:
-        # TODO: implement push to queue currentNode["#"]
+        ctrl.putNext(currentNode["#"], 1, currentAnswers)
+        # 1: priority in queue
         conversations.pop(from_number)
-        message = END_MESSAGE
+        message = END_MESSAGE % ctrl.size(currentNode["#"]) 
       else:
         conversations[from_number] = [currentNode, currentAnswers]
         message = currentNode['Q']
