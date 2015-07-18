@@ -10,7 +10,7 @@ def hello():
 if __name__ == "__main__":
     application.run()
 SECRET_KEY = 'mysecretkey'
-MY_TREE ={'1': {'1': {'1': {'#': 'Customer Service', 'A': 'Customer Service', 'N': 0}, '2': {'#': 'Food', 'A': 'Food', 'N': 0}, '3': {'#': 'More Food', 'A': 'Eat', 'N': 0}, 'A': 'Customer Service', 'N': 3, 'Q': 'What items does it have to do with? Press 1 for Kitchen, 2 for Food, 3 for Eat'}, '2': {'#': 'General', 'A': 'helpdesk', 'N': 0}, '3': {'#': 'General', 'A': 'just want to talk to someone', 'N': 0}, 'A': '%', 'N': 3, 'Q': 'What are you looking for? Press 1 for customer service, press 2 for helpdesk, press 3 if you just want to talk to someone'}, 'A': '%', 'N': 1, 'Q': 'What is your name?'}
+MY_TREE ={'1': {'1': {'1': {'#': 'Customer Service', 'A': 'Customer Service', 'N': 0}, '2': {'#': 'Food', 'A': 'Food', 'N': 0}, '3': {'#': 'More Food', 'A': 'Eat', 'N': 0}, 'A': 'Customer Service', 'N': 3, 'Q': 'What items does it have to do with? Press 1 for Kitchen, 2 for Food, 3 for Eat'}, '2': {'#': 'General', 'A': 'helpdesk', 'N': 0}, '3': {'#': 'General', 'A': 'just want to talk to someone', 'N': 0}, 'A': '%', 'N': 3, 'Q': 'What are you looking for? Press 1 for customer service, press 2 for helpdesk, press 3 if you just want to talk to someone'}, 'A': '%', 'N': 1, 'Q': 'Wt is your name?'}
 
 conversations = {}
 
@@ -37,9 +37,9 @@ def receiveText():
     currentAnswers = conversations[from_number][1]
 
     # if %, means this question is open ended Q. Go to the next regardless of body
-    if '%' in currentNode:
+    if currentNode['A'] == "%": 
       currentAnswers.append( tuple(currentNode['Q'], from_body) )
-      currentNode = currentNode['%']
+      currentNode = currentNode['1']
       if '#' in currentNode:
         #TODO push currentAnswers to Q
         conversations.pop(from_number)
