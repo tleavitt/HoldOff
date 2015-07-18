@@ -35,7 +35,7 @@ def show(pageid):
     more = True
     #print ctrl.empty(pid)
     if not ctrl.empty(pid):
-      QAlist, phone = ctrl.getNextFrom(pid)
+     phone, QAlist = ctrl.getNextFrom(pid)
     else:
       more = False
     #print QAlist

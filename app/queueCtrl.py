@@ -19,7 +19,7 @@ class QueueCtrl(object):
 
 	def putNext(self, id, priority, phonenumber, QAlist):
 		if id in self.bufferList:
-			self.bufferList[id].put(priority, (QAlist, phonenumber))
+			self.bufferList[id].put(priority, (phonenumber, QAlist))
 		else:
 			return
 
