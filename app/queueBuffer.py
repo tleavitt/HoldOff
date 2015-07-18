@@ -35,7 +35,7 @@ class QueueBuffer(object):
     def empty(self):
         return self.q.empty()
 
-    def getLen():
+    def getLen(self):
         return self.q.qsize()
 
 # if __name__ == "__main__":
