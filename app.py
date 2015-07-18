@@ -1,8 +1,14 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, url_for, render_template
 import twilio.twiml
 
 app = Flask(__name__)
 
+@app.route("/")
+def hello():
+    return render_template('index.html')
+
+if __name__ == "__main__":
+    app.run()
 SECRET_KEY = 'mysecretkey'
 MY_TREE ={'Q': 'What is your name?', '1': {'1': {'Q': 'What are you looking for?', '1': {'1': 'Customer service', '1': {'Q': 'What items does it have to do with?', '1': {'1': {'#': 'Customer Service'}, '2': {'#': 'Food'}, '3': {'#': 'More Food'}, '4': {'#': 'General'}, '5': {'#': 'General'}, '1': 'Kitchen', '3': 'I just want to talk to someone', '2': 'Helpdesk'}}}}, '$': 'some stuff'}}
 
@@ -10,7 +16,7 @@ conversations = {}
 
 END_MESSAGE = 'Thanks for answering our questions. We will be calling you shortly!'
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/twilio", methods=['GET', 'POST'])
 def receiveText():
   from_number = request.values.get('From', None)
   from_body = request.values.get('Body', None)
@@ -69,7 +75,3 @@ def receiveText():
     resp.sms(message)
     return str(resp)
 
-
-
-if __name__ == "__main__":
-    app.run()
