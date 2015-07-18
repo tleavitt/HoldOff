@@ -50,11 +50,11 @@ def receiveText():
   from_body = request.values.get('Body', None)
 
   # Allow users to restart the survey/tree at any time
-  if from_body == "restart":
+  if from_body.lower() == "restart":
     if from_number in conversations:
       conversations.pop(from_number)
 
-  if from_body == "cancel":
+  if from_body.lower() == "cancel":
     if from_number in conversations:
       conversations.pop(from_number)
       return
@@ -63,8 +63,7 @@ def receiveText():
   if from_number in conversations:
     currentNode = conversations[from_number][0]
     currentAnswers = conversations[from_number][1]
-
-
+    print "from_body: " + from_body
     if from_body in currentNode:
       currentAnswers.append( (currentNode['Q'], currentNode[from_body]['A']) )
       currentNode = currentNode[from_body]
