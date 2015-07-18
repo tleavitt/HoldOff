@@ -8,35 +8,37 @@ def is_number(s):
 
 def parseConfigFile(confFileName):
 
-	questionTree = {}
+    questionTree = {}
 
-	with open(confFileName) as configFile:
-		build_tree(questionTree, configFile)
+    with open(confFileName) as configFile:
+        lines = configFile.readlines()
+        build_tree(questionTree, lines, 0, len(lines))
 
-	return questionTree
+    return questionTree
 
-def get_next_vals(f):
-	cur_line = f.readline()
-	if cur_line == "":
-		return None, None
-	tokens = cur_line.strip().split(" ")
-	return tokens[0], " ".join(tokens[1:])
+def get_next_vals(lines, i):
+    tokens = lines[i].strip().split(" ")
+    print tokens[0], " ".join(tokens[1:]), i + 1
+    return tokens[0], " ".join(tokens[1:]), i + 1
 
-def build_tree(cur_node, configFile):
-	flag, value = get_next_vals(configFile)
-	print flag, value
-	child_count = 0
-	if flag is None:
-		return
-	elif (flag == "#"):
-		cur_node[flag] = value
-		return
-	elif (is_number(flag) or flag == "Q" or flag == "$"):
-		while True:
-			cur_node[flag] = value
-			child_count += 1
-			cur_node[child_count] = child_node = {}
-			build_tree(child_node, configFile)
-			flag, value = get_next_vals(configFile)
-			print flag, value
-			if flag is None: return
+# returns the line number that the function ended at
+def build_tree(cur_node, lines, i, max_len):
+    if (i >= max_len): return i
+    flag, value, i = get_next_vals(lines, i)
+    if (flag == "#"):
+        cur_node["#"] = value
+        flag, value, i = get_next_vals(lines, i)
+        cur_node["A"] = value
+        flag, value, i = get_next_vals(lines, i)
+        cur_node["N"] = int(value)
+        return i
+    if (flag == "Q"):
+        cur_node["Q"] = value
+        flag, value, i = get_next_vals(lines, i)
+        cur_node["A"] = value
+        flag, value, i = get_next_vals(lines, i)
+        cur_node["N"] = int(value)
+        for child_num in xrange(1, cur_node["N"] + 1):
+            cur_node[str(child_num)] = new_child = {} 
+            i = build_tree(new_child, lines, i, max_len)
+        return i
