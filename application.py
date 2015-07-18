@@ -18,6 +18,7 @@ END_MESSAGE = 'Thanks for answering our questions. We will be calling you shortl
 
 @application.route("/twilio", methods=['GET', 'POST'])
 def receiveText():
+  print conversations
   from_number = request.values.get('From', None)
   from_body = request.values.get('Body', None)
 
