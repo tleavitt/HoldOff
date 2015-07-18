@@ -7,16 +7,16 @@ application = Flask(__name__)
 ctrl = QueueCtrl()
 # ctrl.createChannel('VISA')
 # ctrl.createChannel('Sales')
-# ctrl.putNext('VISA',2.5,[('What is the meal','burger'),("Name","Tom")])
-# ctrl.putNext('VISA',3.5,[('What is the meal','Sandwich'),("Name","James")])
-# ctrl.putNext('VISA',1.5,[('What is the meal','burger'),("Name","Rebecca")])
-# ctrl.putNext('Sales',1.4,[('What is the meal','food'),("Name","Will")])
+# ctrl.putNext('VISA',2.5,'',[('What is the meal','burger'),("Name","Tom")])
+# ctrl.putNext('VISA',3.5,'',[('What is the meal','Sandwich'),("Name","James")])
+# ctrl.putNext('VISA',1.5,'',[('What is the meal','burger'),("Name","Rebecca")])
+# ctrl.putNext('Sales',1.4,'',[('What is the meal','food'),("Name","Will")])
 
 SECRET_KEY = 'mysecretkey'
 MY_TREE, MY_CHANNELS = cfp.parseConfigFile("conf")
 for channel in MY_CHANNELS:
     ctrl.createChannel(channel)
-    
+
 conversations = {}
 END_MESSAGE = 'Thanks for answering our questions! We will be calling you shortly.'# There are %d customers ahead of you in the queue.'
 

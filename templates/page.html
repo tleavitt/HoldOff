@@ -61,7 +61,7 @@
             </ul> 
 
             <div class="card-action">
-               <div class="col" style="position:relative;top:-10px;"><a href="/{{pid}}" class="waves-effect red lighten-2 btn" style="color:white"><i class="material-icons left" style="position:relative;">skip_next</i>Next Customer</a>
+               <div class="col" style="position:relative;top:-10px;"><a  onClick="next()" class="waves-effect red lighten-2 btn" style="color:white"><i class="material-icons left" style="position:relative;">skip_next</i>Next Customer</a>
               </div>
             </div>
           </div>
@@ -99,6 +99,12 @@
 {% if not more %}
   setInterval(function(){  window.location.href="/{{pid}}" }, 10000);
 {% endif %}
+
+
+function next() {
+  window.location.href="/{{pid}}";
+}
+
 </script>
 
 </html>
