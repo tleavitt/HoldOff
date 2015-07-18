@@ -18,7 +18,7 @@ for channel in MY_CHANNELS:
     ctrl.createChannel(channel)
     
 conversations = {}
-END_MESSAGE = 'Thanks for answering our questions! We will be calling you shortly. There are %d customers ahead of you in the queue.'
+END_MESSAGE = 'Thanks for answering our questions! We will be calling you shortly.'# There are %d customers ahead of you in the queue.'
 
 @application.route("/")
 def home():
@@ -71,7 +71,7 @@ def receiveText():
         ctrl.putNext(currentNode["#"], 1, from_number, currentAnswers)
         # 1: priority in queue
         conversations.pop(from_number)
-        message = END_MESSAGE % ctrl.size(currentNode["#"]) 
+        message = END_MESSAGE #% ctrl.size(currentNode["#"]) 
       else:
         conversations[from_number] = [currentNode, currentAnswers]
         message = currentNode['Q']
