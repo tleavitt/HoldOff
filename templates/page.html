@@ -23,7 +23,7 @@
         <div class="row">
           <a href="/" class="brand-logo col offset-s2 "><div style="font-family: 'Merriweather', serif;font-weight:bold;border-radius:50%;background-color:#e57373 ;width:60px;height:60px;padding-left:5px;padding-top:5px;margin-top:16px" class="z-depth-2"><img src="{{ url_for('static', filename='img/phone.gif') }}" width="50px" height="50px"></div><span style="font-family: 'Pacifico', cursive;font-size:15px;position:relative;top:-24px;left:5px">hold off</span></a>
           
-          <div class="title col offset-s4 s3" style="font-family: 'Poiret One', cursive;"><span style="font-size:20px;top:10px;"></span><br/><span style="font-size:30px;top:-24px;font-weight:bold">Home Directory</span></div>
+          <div class="title col offset-s4 s3" style="font-family: 'Poiret One', cursive;"><span style="font-size:20px;top:10px;">Department</span><br/><span style="font-size:30px;top:-24px;font-weight:bold">{{pid}}</span></div>
 
           <div class="col offset-s1" style="position:relative;top:25px"><a class="waves-effect  orange darken-1 btn" onClick="window.open('', '_self', ''); window.close();"><i class="material-icons left" style="position:relative;bottom:13px">power_settings_newt</i>Close channel</a>
           </div>
@@ -37,7 +37,7 @@
     <!-- body -->
 
     <!--if has next container-->
-
+    {% if more %}
     <div class="container">
 
       <div class="row">
@@ -46,36 +46,59 @@
 
           <div class="card">
             
-            <span class="card-title" style="color:#ef5350;margin-left:10px;">Departments</span>
+            <span class="card-title" style="color:#ef5350;margin-left:10px;">Phone Number: {{phone}}</span>
             
             <ul class="collection">
               
               <!--loop-->
-              {% for channel in channels %}
-              <a href="/{{channel}}" class="collection-item answer">{{channel}}</a>
+              {% for item in QAlist %}
+              <li class="collection-item">
+                <span class="question">{{item[0]}}</span>
+                <span class="answer">{{item[1]}}</span>
+              </li>
               {% endfor %}
    
             </ul> 
 
-<!--             <div class="card-action">
+            <div class="card-action">
                <div class="col" style="position:relative;top:-10px;"><a href="/{{pid}}" class="waves-effect red lighten-2 btn" style="color:white"><i class="material-icons left" style="position:relative;">skip_next</i>Next Customer</a>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
     </div> <!-- /container -->
     
-
+    {% else %}
 
     <!--if does not have next customer-->
     
+    <div class="container">
+
+      <div class="row">
+          
+        <div class="col m10 offset-m1">
+
+          <div class="card">
+            
+            <span class="card-title" style="color:#ef5350;margin-left:10px;">Hooray! No customers are on hold.</span>
+
+            <div class="card-action">
+               <div class="col" style="position:relative;top:-10px;"><i class="material-icons left" style="position:relative;">replay_10</i>Refresh every 10 sec
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
 
 
 
   </body>
 <script>
-
+{% if not more %}
+  setInterval(function(){  window.location.href="/{{pid}}" }, 10000);
+{% endif %}
 </script>
 
 </html>

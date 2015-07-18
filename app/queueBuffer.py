@@ -22,10 +22,11 @@ class QueueBuffer(object):
         self.q = Q.PriorityQueue()
         return
 
+    #return next QAlist
     def get(self):
         person = self.q.get()
-        for p in person.getQA(): print p
-        return person
+        #for p in person.getQA(): print p
+        return person.getQA()
 
     def put(self, priority, QAlist):
         person = _Person(priority, QAlist)
