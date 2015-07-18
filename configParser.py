@@ -44,3 +44,4 @@ def build_tree(cur_node, lines, i, max_len, channels):
             cur_node[str(child_num)] = new_child = {} 
             i = build_tree(new_child, lines, i, max_len, channels)
         return i
+        
