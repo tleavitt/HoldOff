@@ -1,15 +1,21 @@
-Q What is your name?
-	$ some stuff
-		Q What are you looking for?
-			1 Customer service
-				Q What items does it have to do with?
-					1 Kitchen
-						# Customer Service
-					2 Food
-						# Food
-					3 Eat
-						# More Food
-			2 Helpdesk
-				# General
-			3 I just want to talk to someone
-				# General
+Q Hello! What are you looking for? Press 1 for customer service, 2 for Helpdesk, 3 for I just want to talk to someone
+A %
+N 3
+	Q What items does it have to do with? 1 Kitchen, 2 Food, 3 Eat
+	A Customer service
+	N 3
+		# Customer Service
+		A Food
+		N 0
+		# Food
+		A Food
+		N 0
+		# More food
+		A Eat
+		N 0
+	# General					
+	A Helpdesk
+	N 0
+	# General
+	A I just want to talk to someone 
+	N 0
